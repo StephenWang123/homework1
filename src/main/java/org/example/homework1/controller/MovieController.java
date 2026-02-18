@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/movies")
 class MovieController {
     private final MovieService movieService;
 
@@ -32,9 +32,9 @@ class MovieController {
      */
     @GetMapping(params = {"Title", "Year", "page"})
     public List<MovieDto> getMoviesWithParams(
-            @RequestParam(required = false) Integer page,
-            @RequestParam(required = false) String Title,
-            @RequestParam(required = false) Integer Year
+            @RequestParam int page,
+            @RequestParam String Title,
+            @RequestParam Integer Year
     ) {
         return movieService.getMoviesWithParams(page, Title, Year);
     }
