@@ -12,7 +12,6 @@ import java.util.List;
 class MovieController {
     private final MovieService movieService;
 
-    // Constructor Injection (clean and professional)
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
