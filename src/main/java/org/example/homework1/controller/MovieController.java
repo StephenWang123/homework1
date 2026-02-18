@@ -17,19 +17,11 @@ class MovieController {
         this.movieService = movieService;
     }
 
-    /**
-     * Method 1:
-     * Get ALL movies (no query parameters)
-     */
     @GetMapping
     public List<MovieDto> getAllMovies() {
         return movieService.getAllMovies();
     }
 
-    /**
-     * Method 2:
-     * Get movies with query parameters
-     */
     @GetMapping(params = {"Title", "Year", "page"})
     public List<MovieDto> getMoviesWithParams(
             @RequestParam int page,

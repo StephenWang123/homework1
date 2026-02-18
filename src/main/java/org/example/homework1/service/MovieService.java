@@ -16,15 +16,11 @@ public class MovieService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    /**
-     * Method 1:
-     * Fetch ALL pages (no filters)
-     */
     public List<MovieDto> getAllMovies() {
 
         List<MovieDto> allMovies = new ArrayList<>();
 
-        // 1️⃣ Fetch first page
+        // Fetch first page
         String firstPageUrl = BASE_URL + "?page=1";
 
         PageDto firstResponse =
@@ -37,7 +33,7 @@ public class MovieService {
         allMovies.addAll(firstResponse.data);
         int totalPages = firstResponse.total_pages;
 
-        // 2️⃣ Multithreading for remaining pages
+        // Multithreading for remaining pages
         ExecutorService executor = Executors.newFixedThreadPool(5);
         List<Future<List<MovieDto>>> futures = new ArrayList<>();
 
@@ -58,7 +54,7 @@ public class MovieService {
             }));
         }
 
-        // 3️⃣ Collect results
+        // Collect results
         for (Future<List<MovieDto>> future : futures) {
             try {
                 allMovies.addAll(future.get());
@@ -72,10 +68,6 @@ public class MovieService {
         return allMovies;
     }
 
-    /**
-     * Method 2:
-     * Fetch ONE specific page with filters
-     */
     public List<MovieDto> getMoviesWithParams(
             int page,
             String Title,
